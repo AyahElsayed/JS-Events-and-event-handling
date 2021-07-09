@@ -1,0 +1,29 @@
+the difference between Event Handlers & addEventListener in JS
+=============================================================
+
+Events are actions or occurrences that happen in the system you are programming, 
+which the system tells you about so you can respond to them in some way if desired
+
+
+- The 2 ways of handling JavaScript Events
+---------------------------------------
+ 1-  By using an event handler
+ 2-  By adding an event listener
+
+
+* Event Handler =>
+    An event handler can be recognized by the JavaScript using an “EventHandler” property of the object.
+    like "onClik" object.onClik
+
+
+* Event Listener =>
+    By adding an event listener to an object, we can catch a wide range of events triggered by the user 
+    or the browser like "object.addEventListener(event, function)"
+
+
+What’s the difference?
+    For a given element, you can only have one event handler per event type, 
+    but you can have multiple event listeners.
+
+    If you’ll use the first method, event handlers, the difference is that if you add two event handlers for 
+    the same button click, the second event handler will overwrite the first and only that event will trigger.
