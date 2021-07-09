@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Selecting Event Targets</title>
+    <meta name="viewport" content="width=device-width" />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      html {
+        font-size: 10px;
+        line-height: 1.5;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+          "Helvetica Neue", sans-serif;
+      }
+      body {
+        padding: 1rem 2rem;
+      }
+      .list-view {
+        list-style: none;
+      }
+      .list-item {
+        font-size: 2rem;
+        line-height: 2rem;
+        font-weight: 100;
+        padding: 1.5rem 1rem;
+      }
+      .list-item span {
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Choosing your Event Targets</h1>
+    <h2>Nothing selected</h2>
+    <main>
+      <ul class="list-view">
+        <li class="list-item" data-id="1" data-name="Sam"
+          >1: <span>Sam</span></li
+        >
+        <li class="list-item" data-id="3" data-name="Dean"
+          >3: <span>Dean</span></li
+        >
+        <li class="list-item" data-id="6" data-name="Ellen"
+          >6: <span>Ellen</span></li
+        >
+        <li class="list-item" data-id="8" data-name="Jo">8: <span>Jo</span></li>
+        <li class="list-item" data-id="11" data-name="Bobbie"
+          >11: <span>Bobbie</span></li
+        >
+        <li class="list-item" data-id="13" data-name="Castiel"
+          >13: <span>Castiel</span></li
+        >
+        <li class="list-item" data-id="15" data-name="Crowley"
+          >15: <span>Crowley</span></li
+        >
+        <li class="list-item" data-id="18" data-name="Amara"
+          >18: <span>Amara</span></li
+        >
+        <li class="list-item" data-id="21" data-name="Chuck"
+          >21: <span>Chuck</span></li
+        >
+      </ul>
+    </main>
+    <script>
+      let partyStarted = function () {
+        //add event listeners to element(s) on the page
+        document
+          .querySelector(".list-view")
+          .addEventListener("click", onClick2);
+        //target will be ul
+
+        let lis = document.querySelectorAll(".list-item");
+        lis.forEach((li) => {
+          //li.addEventListener('click', onClick);
+          //target will be li
+        });
+        let spans = document.querySelectorAll(".list-item span");
+      };
+
+      let onClick2 = function (ev) {
+        alert(ev.target.tagName);
+        let li = ev.target;
+        if (ev.target.tagName == "SPAN") {
+          li = ev.target.parentElement;
+        }
+        let id = li.getAttribute("data-id");
+        let nm = li.getAttribute("data-name");
+        let h2 = document.querySelector("h2");
+        h2.textContent = id + ": " + nm;
+      };
+
+      let onClick = function (ev) {
+        //ev is the click event... but who called it?
+        alert("target " + ev.target + " and currentTarget " + ev.currentTarget);
+
+        let id = ev.currentTarget.getAttribute("data-id");
+        let nm = ev.currentTarget.getAttribute("data-name");
+        let h2 = document.querySelector("h2");
+        h2.textContent = id + ": " + nm;
+      };
+
+      document.addEventListener("DOMContentLoaded", partyStarted);
+    </script>
+  </body>
+</html>
