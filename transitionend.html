@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Transition &amp; Animation Events</title>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="main.css" />
+    <style>
+      p {
+        overflow: hidden;
+        width: 90%;
+        padding: 1rem;
+        margin: 1rem;
+        border: 1px solid #ddd;
+        background-color: hsl(220, 50%, 80%);
+        color: hsl(220, 50%, 30%);
+        font-size: 1rem;
+        line-height: 1.5rem;
+        height: 8rem;
+        position: relative;
+
+        transition: width 0.6s ease-in;
+
+        animation-duration: 0.5s;
+        animation-iteration-count: 1;
+        animation-direction: normal;
+        /*animation-name: glow; */
+      }
+      p:hover {
+        width: 40%;
+      }
+      @keyframes glow {
+        0% {
+          border: 0px solid gold;
+        }
+        50% {
+          border: 4px solid gold;
+        }
+        100% {
+          border: 1px solid gold;
+        }
+      }
+      p::after {
+        display: block;
+        position: absolute;
+        content: " ";
+        right: 0;
+        left: 0;
+        bottom: 0;
+        height: 1rem;
+        background-color: hsla(220, 50%, 80%, 0.64);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Transition &amp; Animation Events</h1>
+    </header>
+    <main>
+      <p
+        >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem ex
+        asperiores odio illo quod accusantium suscipit animi, nam, eveniet iusto
+        sint nisi repudiandae. Quas veniam vitae tempora perferendis dicta
+        ipsa.</p
+      >
+      <p
+        >Accusamus expedita non nam, adipisci delectus est fugit temporibus
+        magnam libero, suscipit blanditiis eligendi perferendis inventore modi
+        eius placeat doloremque dignissimos aliquid nisi quas quidem repellat
+        distinctio.
+      </p>
+      <p
+        >Et consequuntur ab, illum itaque ad ducimus sequi tenetur obcaecati
+        suscipit nesciunt placeat dolores quod odit, optio quae consectetur
+        blanditiis dignissimos corrupti rem eligendi impedit tempore laborum
+        asperiores.</p
+      >
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let ps = document.querySelectorAll("p");
+        ps.forEach((p) => {
+          p.addEventListener("transitionend", glow);
+          p.addEventListener("animationend", noglow);
+        });
+      });
+
+      function glow(ev) {
+        console.log("transitionend");
+        ev.currentTarget.style.animationName = "glow";
+      }
+
+      function noglow(ev) {
+        ev.currentTarget.style.animationName = "";
+      }
+    </script>
+  </body>
+</html>
