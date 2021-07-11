@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mutation Observers</title>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="../video-pages/main.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Mutation Observers</h1>
+    </header>
+    <main>
+      <p title="mouseover text"
+        ><![CDATA[ this is some characterData ]]>Lorem ipsum dolor sit amet,
+        consectetur adipisicing elit. Laborum, quam eos provident sapiente culpa
+        corrupti, deleniti inventore, omnis recusandae repudiandae quasi soluta
+        repellat, expedita suscipit id tenetur excepturi corporis quis.</p
+      >
+      <p
+        >Praesentium ut voluptatem corrupti itaque eveniet necessitatibus
+        tempore cupiditate provident quod voluptas porro qui in, recusandae
+        saepe odit, reiciendis laudantium nulla, nam perferendis nihil dolorum
+        atque est quae. Temporibus, dolorum!</p
+      >
+      <p
+        >Quidem est neque eaque et corrupti magni, doloribus eum. Tempora
+        impedit, veritatis labore accusantium ratione vel. Nesciunt enim quod,
+        beatae quaerat, consectetur sequi veritatis quas dolores ex harum
+        eligendi explicabo!</p
+      >
+    </main>
+    <script>
+      let observer;
+
+      document.addEventListener("DOMContentLoaded", init);
+
+      function init() {
+        let p = document.querySelector("main > p"); //1st p
+        p.addEventListener("click", change);
+
+        let config = {
+          attributes: true,
+          attributeOldValue: true,
+          attributeFilter: ["data-thing", "title", "style"],
+          childList: false,
+          subtree: false,
+          characterData: false,
+          characterDataOldValue: false,
+        };
+        /* childList, attributes, characterData */
+
+        observer = new MutationObserver(mutated);
+        observer.observe(p, config);
+      }
+
+      function change(ev) {
+        let p = ev.currentTarget;
+
+        p.textContent = " this is new content";
+        p.setAttribute("data-thing", 123);
+        p.title = "NEW TITLE";
+
+        let span = document.createElement("span");
+        span.textContent = " SOME SPAN TEXT";
+        p.appendChild(span);
+      }
+
+      function mutated(mutationList) {
+        console.log(mutationList);
+        for (let mutation of mutationList) {
+          if (mutation.type == "childList") {
+            console.log("A child node has been added or removed.");
+          } else if (mutation.type == "attributes") {
+            console.log(
+              "The " + mutation.attributeName + " attribute was modified."
+            );
+            console.log(mutation.oldValue);
+          }
+        }
+        //observer.takeRecords();
+        observer.disconnect();
+
+        //target - Element
+        //addNodes - NodeList
+        //removedNodes - NodeList
+        //oldValue
+        //attributeName
+        //attributeNamespace
+        //nextSibling - Element / textNode
+        //previousSibling - Element / textNode
+        //type 'attributes' or 'childList'
+      }
+    </script>
+  </body>
+</html>
