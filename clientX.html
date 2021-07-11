@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>clientX vs pageX vs screenX vs offsetX</title>
+    <style>
+      html {
+        font-size: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      }
+
+      main {
+        padding: 1rem;
+        margin: 3rem;
+        border: 1px solid #333;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main
+      >Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus magni
+      dolores expedita. Rem maiores inventore quis ipsa odio, quasi fugiat sint
+      eveniet. Repellendus in adipisci dolore nobis libero quam minus?
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelector("main").addEventListener("click", f);
+      });
+
+      function f(ev) {
+        console.log(ev.target.tagName, "clicked");
+        console.log("clientX", ev.clientX);
+        console.log("pageX", ev.pageX);
+        console.log("screenX", ev.screenX);
+        console.log("offsetX", ev.offsetX);
+      }
+    </script>
+  </body>
+</html>
