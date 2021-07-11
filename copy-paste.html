@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Copy Paste Events</title>
+    <style>
+      p span {
+        font-style: italic;
+        font-weight: 100;
+      }
+      [contenteditable] span {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <header><h1>Copy and Paste Events</h1></header>
+    <main>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        <span>Deleniti nihil id accusamus neque provident</span> sed architecto
+        adipisci deserunt, sint maiores quo. Alias tenetur optio reiciendis
+        similique corporis excepturi blanditiis officia.
+      </p>
+      <p>
+        Quasi rem minus aliquid error aperiam impedit alias voluptatem.
+        Excepturi ipsa perferendis <span>nobis quasi magnam</span>, impedit ex
+        atque sunt modi qui iusto numquam. Perferendis earum assumenda est
+        cumque pariatur tenetur!
+      </p>
+      <p contenteditable="true"> Paste your content here. </p>
+      <p contenteditable="true"> OR paste your content here. </p>
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("copy", doCopy);
+        document.addEventListener("paste", doPaste);
+        document.querySelector("h1").addEventListener("click", autoCopy);
+      });
+
+      function autoCopy(ev) {
+        let h1 = ev.target;
+        //select the content of the h1
+        let select = document.getSelection();
+        select.removeAllRanges();
+        let range = document.createRange();
+        range.selectNode(h1.firstChild); //textNode inside the h1
+        select.addRange(range);
+        //highlight the whole selection
+
+        //then tell the browser to do a copy
+        document.execCommand("copy");
+        //this will trigger the doCopy function
+      }
+
+      function doCopy(ev) {
+        //ev is a ClipBoardEvent
+
+        // get the actual selected text
+        let selection = document.getSelection(); //what has the user selected
+        selection = selection.toString().toUpperCase();
+        console.log(selection); //UPPERCASE
+        ev.clipboardData.setData("text/plain", selection);
+
+        ev.preventDefault();
+      }
+
+      function doPaste(ev) {
+        // ev.clipboardData - is a DataTransfer object
+        let data = ev.clipboardData.getData("text/plain");
+        //data is the content we copied above
+        console.log(data);
+
+        // let txt = document.createTextNode(data);
+
+        let span = document.createElement("span");
+        span.textContent = data;
+
+        let selection = document.getSelection();
+        if (!selection.rangeCount) return false;
+        selection.deleteFromDocument();
+        //remove the old content that was selected
+        selection.getRangeAt(0).insertNode(span);
+        //inserts before the selected area
+
+        ev.preventDefault();
+      }
+    </script>
+  </body>
+</html>
