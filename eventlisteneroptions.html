@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EventListenerOptions</title>
+
+    <script>
+      /* passive: <boolean>, once: <boolean>, capture: <boolean> */
+      document.addEventListener("DOMContentLoaded", () => {
+        //add listeners  - useCapture
+        document
+          .querySelector("main p")
+          .addEventListener("click", f1, { capture: false, once: true });
+
+        document.body.addEventListener("touchstart", f2, {
+          capture: false,
+          passive: false,
+        });
+
+        document
+          .querySelector("p:nth-child(2)")
+          .addEventListener("touchstart", f3, {
+            capture: false,
+            passive: false,
+          });
+      });
+
+      function f1(ev) {
+        let num = Math.random().toString(16).substr(2, 6);
+        console.log(num);
+        ev.target.style.backgroundColor = `#${num}`;
+      }
+
+      function f2(ev) {
+        ev.preventDefault();
+        console.log("touchstart on body");
+      }
+
+      function f3(ev) {
+        ev.preventDefault();
+        console.log("touchstart on p 2");
+      }
+    </script>
+  </head>
+  <body>
+    <header><h1>EventListener Options</h1></header>
+    <main>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur
+        nemo magni harum placeat unde, nesciunt debitis, impedit, inventore
+        commodi modi recusandae est delectus libero error nihil esse corrupti
+        tempora repellendus!
+      </p>
+      <p>
+        Aut minima autem possimus alias delectus nam consequuntur saepe quis
+        accusamus? Aliquid, inventore illo voluptate eveniet ea, non reiciendis
+        incidunt expedita, dignissimos officia ex tenetur totam natus!
+        Explicabo, ipsum sunt!
+      </p>
+      <p>
+        Perspiciatis, nisi eos eligendi vitae quia iste sit assumenda est
+        impedit hic optio delectus rem nihil fugit at suscipit cupiditate
+        doloremque quis molestiae dolores in, a eaque, libero repellendus!
+        Officia!
+      </p>
+      <p>
+        Laudantium quos vel qui soluta rem quis odio, itaque est minus modi
+        quaerat recusandae aspernatur maiores veniam sit aliquid maxime nostrum
+        ipsam nesciunt facere molestiae obcaecati voluptate animi. Asperiores,
+        ratione.
+      </p>
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic soluta
+        facilis eum nulla voluptatem ipsam dolor debitis fuga quod et, impedit
+        quo neque cumque sed, quos qui nam magni error?
+      </p>
+      <p>
+        Harum velit amet modi officiis a nam minus dolor ducimus corporis sint
+        officia maiores veritatis, mollitia, ullam architecto dolores,
+        voluptates iste magni distinctio. Necessitatibus expedita exercitationem
+        neque labore velit reprehenderit!
+      </p>
+      <p>
+        Magnam, adipisci ratione veniam neque quidem officia quia blanditiis
+        voluptate corrupti. Quia dolorem molestias repellat delectus, sit
+        voluptatum id doloremque blanditiis nulla possimus labore architecto
+        distinctio officiis, quasi, veritatis nemo!
+      </p>
+      <p>
+        Adipisci, laboriosam architecto fuga ea quo similique est voluptates
+        harum facere modi rem hic nihil quae eveniet? Esse illum delectus
+        aliquid asperiores ut necessitatibus reprehenderit, excepturi quia quos
+        magnam tenetur.
+      </p>
+    </main>
+  </body>
+</html>
