@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Composed Path</title>
+  </head>
+  <body>
+    <header><h1>Event composedPath Method</h1></header>
+    <main>
+      <p>
+        <span
+          ><a href="#">Lorem ipsum dolor sit amet</a> consectetur adipisicing
+          elit</span
+        >. Tenetur inventore praesentium sequi accusamus quidem voluptatibus
+        quam asperiores magni laboriosam in, excepturi minus iste, debitis
+        soluta quasi cumque nulla voluptate voluptatum.
+      </p>
+      <p>
+        Voluptatum
+        <q
+          >impedit placeat sapiente pariatur sunt vitae eaque iusto ratione
+          accusantium assumenda</q
+        >
+        esse animi odio dignissimos aliquam dolor aspernatur, recusandae eos,
+        similique veritatis, beatae ducimus aut? Nobis perferendis laborum id!
+      </p>
+      <p>
+        Atque,
+        <span
+          >illum rerum incidunt tempora esse ea porro qui quisquam at nemo
+          eligendi impedit
+          <mark>facilis placeat officiis maiores ab!</mark> Voluptatibus
+          nesciunt eveniet numquam</span
+        >
+        quia tenetur! Iure deleniti alias magni repellendus?
+      </p>
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        //add click listeners to ALL elements inside main
+        document.querySelectorAll("main *").forEach(addClick);
+      });
+
+      function addClick(tag) {
+        //add a click listener to the tag
+        tag.addEventListener("click", (ev) => {
+          ev.preventDefault(); //just to stop the anchor
+          ev.stopPropagation();
+          console.log(ev.target.tagName);
+          console.log(ev.composedPath()); // Array
+        });
+      }
+    </script>
+  </body>
+</html>
