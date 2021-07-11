@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Screen Orientation</title>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Screen Orientation</h1>
+    </header>
+    <main>
+      <div id="output"></div>
+    </main>
+    <script>
+      let orn = getOrientation();
+      let out = document.getElementById("output");
+      out.textContent = orn;
+
+      function getOrientation() {
+        let _orn =
+          screen.msOrientation ||
+          (screen.orientation || screen.mozOrientation).type;
+
+        switch (_orn) {
+          case "portrait-primary":
+          case "portrait-secondary":
+            break;
+          case "landscape-primary":
+            console.log("This is the laptop/desktop version");
+            break;
+          case "landscape-secondary":
+            break;
+          case undefined:
+            //not supported
+            break;
+          default:
+          //something unknown
+        }
+        return _orn;
+      }
+
+      window.addEventListener("orientationchange", (ev) => {
+        orn = getOrientation();
+        out.textContent = orn;
+        console.dir(ev);
+      });
+    </script>
+  </body>
+</html>
