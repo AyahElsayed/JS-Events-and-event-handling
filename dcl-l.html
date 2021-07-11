@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>DomContentLoaded</title>
+    <script>
+      let startTime = performance.now();
+    </script>
+
+    <link rel="shortcut icon" href="./github.svg" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Inconsolata|Noto+Sans+SC"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    />
+
+    <link href="./dcl-l.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <h1>DomContentLoaded vs load</h1>
+    </header>
+    <p
+      >This page is loading a CDN version of Bootstrap CSS, a google font CSS
+      file, a local CSS file that uses the fonts from Google, CDN versions of
+      the three JS files for Bootstrap, a local JS file using the
+      DOMContentLoaded event, and a series of large images in the body all from
+      https://unsplash.com/.</p
+    >
+    <p
+      ><img
+        alt="https://unsplash.com/photos/lCGzifXHfyg"
+        src="./unsplash-2.jpg"
+      />Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex veritatis
+      cum sapiente cumque repellat unde, quam assumenda deleniti hic doloremque
+      officia eos eius aperiam impedit tempora iste minima dignissimos
+      eveniet.</p
+    >
+    <p
+      ><img
+        alt="https://unsplash.com/photos/lCGzifXHfyg"
+        src="./unsplash-1.jpg"
+      />Porro est odit fuga nostrum vero veniam, rem repellat delectus molestias
+      sed modi obcaecati maxime architecto aspernatur labore cumque
+      exercitationem, earum saepe officiis temporibus iste voluptatum ex iusto
+      ratione? Dolorum?</p
+    >
+    <p
+      ><img
+        alt="https://unsplash.com/photos/qToVxSYXPYU"
+        src="./unsplash-3.jpg"
+      />Eos voluptate asperiores excepturi, fugiat accusamus, temporibus
+      deserunt molestias similique aliquam repudiandae, maiores quibusdam totam
+      vel velit enim reiciendis at necessitatibus consequatur illo veniam
+      nostrum molestiae explicabo praesentium! Minima, ipsam.</p
+    >
+    <p
+      ><img
+        alt="https://unsplash.com/photos/QMp3VXIO3BE"
+        src="./unsplash-4.jpg"
+      />Commodi nisi, ipsam ducimus accusantium eos, at dolor quia possimus,
+      laudantium et voluptate saepe. Iusto architecto, itaque eos molestias
+      vitae exercitationem, quia voluptate quaerat laborum odit cupiditate
+      excepturi obcaecati? Repellendus.</p
+    >
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script>
+      window.addEventListener("load", (ev) => {
+        console.log(ev.type);
+        let endTime = performance.now();
+        let diff = endTime - startTime;
+        console.log(ev.type, diff);
+      });
+
+      document.addEventListener("DOMContentLoaded", (ev) => {
+        console.log(ev.type);
+        let endTime = performance.now();
+        let diff = endTime - startTime;
+        console.log(ev.type, diff);
+      });
+    </script>
+  </body>
+</html>
