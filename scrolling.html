@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JavaScript Scrolling Methods</title>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="main.css" />
+    <style>
+      h1 {
+        cursor: pointer;
+        font-size: 2.5rem;
+        color: white;
+        text-shadow: 2px 2px 2px black;
+        background-color: hsla(90, 30%, 70%, 0.5);
+      }
+      main {
+        transition: transform 1s ease-in;
+        position: relative;
+        z-index: -1;
+      }
+      main.up {
+        transform: translateY(-600px);
+      }
+      p::before {
+        content: attr(data-num);
+
+        font-size: 2.6rem;
+        line-height: 3rem;
+        height: 3rem;
+        width: 3rem;
+        text-align: center;
+        margin-right: 1rem;
+        display: inline-block;
+        transform: rotate(-20deg);
+        background-color: #666;
+        color: #eee;
+        border-radius: 50%;
+      }
+      p:nth-child(odd)::before {
+        transform: rotate(20deg);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>JavaScript Scrolling Methods</h1>
+    </header>
+    <main>
+      <p data-num="1"
+        >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum error,
+        sequi impedit vitae enim consequatur. Beatae, ipsa doloremque
+        voluptatibus temporibus hic, optio non quidem. Recusandae culpa aperiam
+        architecto vitae non!</p
+      >
+      <p data-num="2"
+        >A voluptatibus earum nemo, repellendus accusamus quasi nam expedita
+        quos atque odio illum, magnam est quaerat. Quaerat fugiat saepe, sed
+        accusamus, dolor ex amet commodi dicta hic vitae rem asperiores.</p
+      >
+      <p data-num="3"
+        >Iure ullam ad deserunt consectetur iusto blanditiis totam modi
+        reiciendis minus, quod vitae laboriosam molestiae autem numquam officia
+        commodi enim et! Necessitatibus eligendi veniam dolore mollitia odio
+        nemo magnam amet!</p
+      >
+      <p data-num="4"
+        >Omnis ullam magni suscipit repudiandae quas commodi, veritatis nihil,
+        ex enim nemo fugiat laboriosam, eos qui iusto, tempora corporis
+        obcaecati nulla sapiente at saepe eius explicabo possimus quidem iste?
+        Nulla.</p
+      >
+      <p data-num="5"
+        >Nisi cum nobis beatae veniam hic, corporis delectus eligendi expedita,
+        modi, voluptate, consequuntur earum! Quasi distinctio dolor dignissimos
+        nostrum, magni rerum eveniet possimus quod consequuntur beatae earum
+        accusantium, corporis sit.</p
+      >
+      <p data-num="6"
+        >A facilis quisquam officia provident aliquid harum ea dolorem cumque
+        itaque. Non rerum, ullam, at vero deserunt iusto ea ipsum deleniti in ex
+        quam molestiae mollitia recusandae modi unde. Neque.</p
+      >
+      <p data-num="7"
+        >Quisquam, doloremque consectetur quis non quibusdam quos enim ea
+        numquam eaque, cum, nulla perferendis magni provident vitae alias velit!
+        Iusto, ex, et. Eum minus illo sed deserunt repellat pariatur porro.</p
+      >
+      <p data-num="8"
+        >Eligendi quam cumque alias id molestiae sint, quod consectetur expedita
+        amet quia aspernatur consequatur nihil quibusdam cupiditate eum vero
+        quis harum corrupti! Eveniet ex dolores eum doloremque consectetur,
+        nobis beatae!</p
+      >
+      <p data-num="9"
+        >Exercitationem doloremque dolorem odit sint iure fugiat facere, placeat
+        dignissimos enim obcaecati, aut sit neque molestiae omnis nihil
+        explicabo dicta alias distinctio laborum quaerat repellat quae possimus!
+        Nisi, pariatur aperiam!</p
+      >
+      <p data-num="10"
+        >Illo voluptatibus modi, doloribus aut consectetur, quidem, aperiam
+        ducimus distinctio accusamus qui doloremque, eius sequi? Dignissimos,
+        laboriosam sit, recusandae distinctio praesentium neque suscipit,
+        maiores repellat eum eius assumenda, ex officiis.</p
+      >
+    </main>
+    <script>
+      let h1 = document.querySelector("h1");
+      h1.addEventListener("click", (ev) => {
+        //scrollBy(x, y) scrollTo(x, y)
+        //scrollX(x) scrollY(y)
+        //onscroll
+        console.group();
+        console.log("client", ev.clientX, ev.clientY);
+        //top of the visible screen
+        console.log("page", ev.pageX, ev.pageY);
+        //top of the document(webpage)
+        console.log("offset", h1.offsetLeft, h1.offsetTop);
+        console.log("screen window", window.screenX, window.screenY);
+        console.log("screen ev", ev.screenX, ev.screenY);
+        console.groupEnd();
+        window.scrollBy(0, 600); //document.querySelector('main').classList.toggle('up')
+      });
+
+      window.addEventListener("scroll", (ev) => {
+        console.group();
+        console.log("client", ev.clientX, ev.clientY);
+        //top of the visible screen
+        console.log("page", ev.pageX, ev.pageY);
+        //top of the document(webpage)
+        console.log("offset", h1.offsetLeft, h1.offsetTop);
+        console.log("screen window", window.screenX, window.screenY);
+        console.log("screen ev", ev.screenX, ev.screenY);
+        console.groupEnd();
+
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 2000);
+      });
+    </script>
+  </body>
+</html>
